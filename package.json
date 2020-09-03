@@ -1,0 +1,19 @@
+{
+  "name": "offline-sqs-bug",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sls offline start"
+  },
+  "keywords": [],
+  "author": "Andreas Zoellner",
+  "license": "MIT",
+  "devDependencies": {
+    "aws-sdk": "^2.745.0",
+    "serverless-offline": "^6.7.0",
+    "serverless-offline-sqs": "^4.1.0"
+  },
+  "dependencies": {}
+}

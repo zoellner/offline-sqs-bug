@@ -1,0 +1,39 @@
+service: offline-sqs-bug
+
+frameworkVersion: ">=1.1.0 <2.0.0"
+
+plugins:
+  - serverless-offline-sqs
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ${self:custom.region}
+  stage: ${self:custom.stage}
+
+custom:
+  stage: 'local'
+  region: 'us-east-1'
+
+  serverless-offline:
+    httpPort: 9100
+    lambdaPort: 9101
+    # useWorkerThreads: true
+  serverless-offline-sqs:
+    autoCreate: false
+    apiVersion: '2012-11-05'
+    endpoint: http://127.0.0.1:9300
+    region: ${self:provider.region}
+    accessKeyId: root
+    secretAccessKey: root
+    skipCacheInvalidation: false
+
+functions:
+  JobQueueHandler:
+    handler: ./index.handler
+    events:
+      - sqs:
+          arn: arn:aws:sqs:us-east-1:123456789012:test-queue
+          batchSize: 1
+
